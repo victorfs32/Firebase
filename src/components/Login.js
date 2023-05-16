@@ -18,22 +18,38 @@ function Login() {
     setDarkMode(!darkMode);
   };
 
+  const handleGitHubSignIn = () => {
+    const provider = new firebase.auth.GithubAuthProvider();
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then((result) => {
+        // Usuário autenticado com sucesso
+        const user = result.user;
+        console.log(user);
+        alert("Você está conectado!");
+        setTimeout(() => {
+          navigate("/home"); // Redirecionamento após 4 segundos
+        }, 4000);
+      })
+      .catch((error) => {
+        // Trate os erros caso ocorra algum problema
+        console.error(error);
+      });
+  };
+
   const handleGoogleSignIn = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     firebase
       .auth()
       .signInWithPopup(provider)
       .then((result) => {
-        // Aqui você pode acessar as informações do usuário logado
+        // Usuário autenticado com sucesso
         const user = result.user;
         console.log(user);
-
-        // Exibir um alerta quando o usuário estiver conectado
-        alert("Você está conectado");
-
-        // Atraso de 4 segundos antes de redirecionar para a página "/home"
+        alert("Você está conectado!");
         setTimeout(() => {
-          navigate("/home");
+          navigate("/home"); // Redirecionamento após 4 segundos
         }, 4000);
       })
       .catch((error) => {
@@ -54,11 +70,11 @@ function Login() {
           <a href="#">
             <FaFacebook id="img" />
           </a>
+          <a href="#" onClick={handleGitHubSignIn}>
+            <GoMarkGithub id="img" />
+          </a>
           <a href="#" onClick={handleGoogleSignIn}>
             <FcGoogle id="img" />
-          </a>
-          <a href="#">
-            <GoMarkGithub id="img" />
           </a>
         </div>
 

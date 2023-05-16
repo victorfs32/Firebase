@@ -22,6 +22,22 @@ function Home() {
       });
   };
 
+  // Função para lidar com a autenticação do GitHub
+  const signInWithGitHub = () => {
+    const provider = new firebase.auth.GithubAuthProvider();
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then((result) => {
+        // Autenticação bem-sucedida, atualiza o estado do usuário
+        setUser(result.user);
+      })
+      .catch((error) => {
+        // Erro durante a autenticação
+        console.error(error);
+      });
+  };
+
   // Função para realizar o logout do usuário
   const signOut = () => {
     firebase
@@ -64,11 +80,18 @@ function Home() {
       <h1>Seja Bem-vindo</h1>
       {user ? (
         <>
-          <p>Você está logado como {user.displayName}</p>
+          {user.providerData[0].providerId === "github.com" ? (
+            <p>Você está logado com o GitHub</p>
+          ) : (
+            <p>Você está logado como {user.displayName}</p>
+          )}
           <button onClick={signOut}>Deslogar</button>
         </>
       ) : (
-        <button onClick={signInWithGoogle}>Entrar com o Google</button>
+        <>
+          <button onClick={signInWithGoogle}>Entrar com o Google</button>
+          <button onClick={signInWithGitHub}>Entrar com o GitHub</button>
+        </>
       )}
     </>
   );

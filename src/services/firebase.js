@@ -1,4 +1,5 @@
-import firebase from "firebase/app"; // Corrigido para importar corretamente o pacote 'firebase/app'
+import firebase from "firebase/app";
+import "firebase/auth";
 import "firebase/database";
 
 const firebaseConfig = {
