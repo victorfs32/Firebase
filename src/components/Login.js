@@ -1,17 +1,45 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { BsFillMoonFill } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
 import { GoMarkGithub } from "react-icons/go";
 import { BiUserCircle } from "react-icons/bi";
 import { AiFillLock } from "react-icons/ai";
+import firebase from "firebase/app";
+import "firebase/auth";
 import "./Login.css"; // Importe o arquivo CSS
 
 function Login() {
+  const navigate = useNavigate();
   const [darkMode, setDarkMode] = useState(false);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
+  };
+
+  const handleGoogleSignIn = () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then((result) => {
+        // Aqui você pode acessar as informações do usuário logado
+        const user = result.user;
+        console.log(user);
+
+        // Exibir um alerta quando o usuário estiver conectado
+        alert("Você está conectado");
+
+        // Atraso de 4 segundos antes de redirecionar para a página "/home"
+        setTimeout(() => {
+          navigate("/home");
+        }, 4000);
+      })
+      .catch((error) => {
+        // Trate os erros caso ocorra algum problema
+        console.error(error);
+      });
   };
 
   return (
@@ -26,7 +54,7 @@ function Login() {
           <a href="#">
             <FaFacebook id="img" />
           </a>
-          <a href="#">
+          <a href="#" onClick={handleGoogleSignIn}>
             <FcGoogle id="img" />
           </a>
           <a href="#">
@@ -37,11 +65,16 @@ function Login() {
         <div id="inputs">
           <div className="input-box">
             <label htmlFor="name">
-              Name
+              Usuário
               <div className="input-field">
                 <BiUserCircle id="user" />
-                <input type="text" id="name" name="name" maxLength={10} required />
-
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  maxLength={10}
+                  required
+                />
               </div>
             </label>
           </div>
@@ -51,7 +84,13 @@ function Login() {
               Password
               <div className="input-field">
                 <AiFillLock id="lock" />
-                <input type="password" id="password" name="password" maxLength={8} required />
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  maxLength={8}
+                  required
+                />
               </div>
             </label>
 
