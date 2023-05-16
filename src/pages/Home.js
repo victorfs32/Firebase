@@ -83,7 +83,7 @@ function Home() {
           {user.providerData[0].providerId === "github.com" ? (
             <p>Você está logado com o GitHub</p>
           ) : (
-            <p>Você está logado como {user.displayName}</p>
+            <p>Você está logado com {user.email}</p>
           )}
           <button onClick={signOut}>Deslogar</button>
         </>
