@@ -177,9 +177,14 @@
 
 /* Forgot password */
 #forgot_password a {
+  display: flex;
   text-decoration: none;
   color: var(--color-dark-50);
   font-size: 12px;
+}
+
+#Register{
+  cursor: pointer;
 }
 
 #forgot_password a:hover {
