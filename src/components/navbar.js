@@ -37,7 +37,7 @@ function SidebarMenu() {
                   aria-current="page"
                 >
                   <i className="bi bi-grid"></i>
-                  <span className="ms-2 d-none d-sm-inline">Usuarios</span>
+                  <span className="ms-2 d-none d-sm-inline">Gereciador</span>
                   <i className="bi bi-arrow-down-short ms-0 ms-sm-3"></i>
                 </a>
                 <ul
@@ -51,12 +51,12 @@ function SidebarMenu() {
                       href="#"
                       aria-current="page"
                     >
-                      <span className="d-none d-sm-inline">Item</span> 1
+                      <span className="d-none d-sm-inline">Admin</span>
                     </a>
                   </li>
                   <li className="nav-item text-white text-center text-sm-start">
                     <a className="nav-link" href="#">
-                      <span className="d-none d-sm-inline">Item</span> 2
+                      <span className="d-none d-sm-inline">Usuarios</span>
                     </a>
                   </li>
                 </ul>
@@ -91,8 +91,8 @@ function SidebarMenu() {
               <a className="dropdown-item" href="#">
                 Perfil
               </a>
-              <a className="dropdown-item disabled" href="#">
-                Setting
+              <a className="dropdown-item" href="#">
+                Configurações
               </a>
             </div>
           </div>
