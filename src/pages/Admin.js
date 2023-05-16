@@ -1,13 +1,13 @@
 import React from "react";
 import SidebarMenu from "../components/navbar";
 
-function Usuarios() {
+function Admin() {
   return (
     <>
     <SidebarMenu/>
-      <h1>Pagina de Usuarios</h1>
+      <h1>pagina Admin</h1>
     </>
   );
 }
 
-export default Usuarios;
+export default Admin;

@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import firebase from "firebase/app"; // Importe o objeto firebase aqui
+import "firebase/auth";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/js/dist/dropdown";
 import "bootstrap/js/dist/collapse";
+import { Link } from "react-router-dom";
 import "./navbar.css";
 
 function SidebarMenu() {
+  const [userDisplayName, setUserDisplayName] = useState(null);
+
+  useEffect(() => {
+    const currentUser = firebase.auth().currentUser;
+    if (currentUser) {
+      setUserDisplayName(currentUser.displayName);
+    }
+  }, []);
+
   return (
     <div className="container-fluid">
       <div className="row">
@@ -26,7 +38,14 @@ function SidebarMenu() {
                   aria-current="page"
                 >
                   <i className="bi bi-speedometer2"></i>
-                  <span className="ms-2 d-none d-sm-inline">Home</span>
+                  <span className="ms-2 d-none d-sm-inline">
+                    <Link
+                      to="/Home"
+                      className="text-decoration-none text-white"
+                    >
+                      Home
+                    </Link>
+                  </span>
                 </a>
               </li>
               <li className="nav-item my-1 py-2 py-sm-0">
@@ -51,12 +70,26 @@ function SidebarMenu() {
                       href="#"
                       aria-current="page"
                     >
-                      <span className="d-none d-sm-inline">Admin</span>
+                      <span className="d-none d-sm-inline">
+                        <Link
+                          to="/Admin"
+                          className="text-decoration-none text-white"
+                        >
+                          Admin
+                        </Link>
+                      </span>
                     </a>
                   </li>
                   <li className="nav-item text-white text-center text-sm-start">
-                    <a className="nav-link" href="#">
-                      <span className="d-none d-sm-inline">Usuarios</span>
+                    <a className="nav-link text-white" href="#">
+                      <span className="d-none d-sm-inline">
+                        <Link
+                          to="/Usuarios"
+                          className="text-decoration-none text-white"
+                        >
+                          Usuarios
+                        </Link>
+                      </span>
                     </a>
                   </li>
                 </ul>
@@ -85,7 +118,9 @@ function SidebarMenu() {
               aria-expanded="false"
             >
               <i className="bi bi-person f5-4"></i>
-              <span className="fs-5 ms-3 d-none d-sm-inline">Yousaf</span>
+              <span className="fs-5 ms-3 d-none d-sm-inline">
+                {userDisplayName}
+              </span>
             </a>
             <div className="dropdown-menu" aria-labelledby="triggerId">
               <a className="dropdown-item" href="#">
