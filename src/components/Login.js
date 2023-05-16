@@ -40,7 +40,7 @@ function Login() {
               Name
               <div className="input-field">
                 <BiUserCircle id="user" />
-                <input type="text" id="name" name="name" maxLength={8} required />
+                <input type="text" id="name" name="name" maxLength={10} required />
 
               </div>
             </label>
