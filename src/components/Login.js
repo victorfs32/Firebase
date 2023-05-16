@@ -6,6 +6,7 @@ import { FaFacebook } from "react-icons/fa";
 import { GoMarkGithub } from "react-icons/go";
 import { BiUserCircle } from "react-icons/bi";
 import { AiFillLock } from "react-icons/ai";
+import { HiOutlineMail } from 'react-icons/hi';
 import firebase from "firebase/app";
 import "firebase/auth";
 import "./Login.css"; // Importe o arquivo CSS
@@ -58,9 +59,47 @@ function Login() {
       });
   };
 
+  const handleEmailSignIn = (event) => {
+    event.preventDefault();
+    const email = event.target.elements.email.value;
+    const password = event.target.elements.password.value;
+
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((result) => {
+        // Usuário autenticado com sucesso
+        const user = result.user;
+        console.log(user);
+        alert("Você está conectado!");
+        setTimeout(() => {
+          navigate("/home"); // Redirecionamento após 4 segundos
+        }, 4000);
+      })
+      .catch((error) => {
+        // Trate os erros caso ocorra algum problema
+        console.error(error);
+      });
+  };
+
+  const handlePasswordReset = (event) => {
+    event.preventDefault();
+    const email = event.target.elements.email.value;
+
+    firebase
+      .auth()
+      .sendPasswordResetEmail(email)
+      .then(() => {
+        alert("E-mail de redefinição de senha enviado!");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <main id="container" className={darkMode ? "dark-mode" : ""}>
-      <form id="login_form">
+      <form id="login_form" onSubmit={handleEmailSignIn}>
         <div id="form_header">
           <h1>Login</h1>
           <BsFillMoonFill id="mode_icon" onClick={toggleDarkMode} />
@@ -77,20 +116,13 @@ function Login() {
             <FcGoogle id="img" />
           </a>
         </div>
-
         <div id="inputs">
           <div className="input-box">
-            <label htmlFor="name">
-              Usuário
+            <label htmlFor="email">
+              E-mail
               <div className="input-field">
-                <BiUserCircle id="user" />
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  maxLength={10}
-                  required
-                />
+                <HiOutlineMail id="user" />
+                <input type="email" id="email" name="email" required />
               </div>
             </label>
           </div>
@@ -111,7 +143,9 @@ function Login() {
             </label>
 
             <div id="forgot_password">
-              <a href="#">Forgot your password?</a>
+              <a href="#" onClick={handlePasswordReset}>
+                Forgot your password?
+              </a>
             </div>
           </div>
         </div>

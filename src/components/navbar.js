@@ -24,7 +24,7 @@ function NavScrollExample({ userName }) {
             <Nav.Link as={Link} to="/">
               Home
             </Nav.Link>
-            <Nav.Link as={Link} to="/Login">
+            <Nav.Link as={Link} to="#">
               Login
             </Nav.Link>
             <NavDropdown title="Painel" id="navbarScrollingDropdown">
