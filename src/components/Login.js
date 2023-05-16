@@ -19,18 +19,18 @@ function Login() {
       <form id="login_form">
         <div id="form_header">
           <h1>Login</h1>
-          <BsFillMoonFill onClick={toggleDarkMode} />
+          <BsFillMoonFill id="mode_icon" onClick={toggleDarkMode} />
         </div>
 
         <div id="social_media">
           <a href="#">
-            <FaFacebook />
+            <FaFacebook id="img" />
           </a>
           <a href="#">
-            <FcGoogle />
+            <FcGoogle id="img" />
           </a>
           <a href="#">
-            <GoMarkGithub />
+            <GoMarkGithub id="img" />
           </a>
         </div>
 
@@ -39,8 +39,9 @@ function Login() {
             <label htmlFor="name">
               Name
               <div className="input-field">
-                <BiUserCircle />
-                <input type="text" id="name" name="name" />
+                <BiUserCircle id="user" />
+                <input type="text" id="name" name="name" maxLength={8} required />
+
               </div>
             </label>
           </div>
@@ -49,8 +50,8 @@ function Login() {
             <label htmlFor="password">
               Password
               <div className="input-field">
-                <AiFillLock />
-                <input type="password" id="password" name="password" />
+                <AiFillLock id="lock" />
+                <input type="password" id="password" name="password" maxLength={8} required />
               </div>
             </label>
 

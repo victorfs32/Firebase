@@ -6,7 +6,7 @@
   --color-light-50: #f8fafc;
 
   /* Dark */
-  --color-dark-50: #797984;
+  --color-dark-50: #000000;
   --color-dark-100: #312d37;
   --color-dark-900: #000;
 
@@ -33,14 +33,34 @@
 }
 
 .dark-mode {
-    background-color: #1f1f1f;
-    color: #fff;
-  }
-  
-  .dark-mode #login_form {
-    background-color: black;
-    color: #ffffff;
-  }
+  background-color: #1f1f1f;
+  color: #fff;
+}
+
+.dark-mode .input-field input {
+  color: white;
+}
+
+.dark-mode #login_form {
+  background-color: black;
+  color: #ffffff;
+}
+
+.dark-mode .input-box > label {
+  color: white;
+}
+
+.dark-mode #user {
+  color: white;
+}
+
+.dark-mode #lock {
+  color: white;
+}
+
+.dark-mode #forgot_password a {
+  color: var(--color-purple-50);
+}
 
 #container {
   height: 100vh;
@@ -90,17 +110,21 @@
   font-size: 20px;
 }
 
+#mode_icon:hover {
+  transform: scale(1.2);
+}
+
 /* Social Media */
 #social_media {
   display: flex;
   justify-content: space-around;
 }
 
-#social_media img {
-  width: 35px;
+#social_media #img {
+  font-size: 30px;
 }
 
-#social_media img:hover {
+#social_media #img:hover {
   transform: scale(1.2);
 }
 
@@ -145,6 +169,12 @@
   outline: none;
 }
 
+#user,
+#lock {
+  font-size: 20px;
+  color: #000000;
+}
+
 /* Forgot password */
 #forgot_password a {
   text-decoration: none;
@@ -173,14 +203,14 @@
 }
 
 /* Dark Mode */
-.dark#login_form {
+.dark-mode#login_form {
   color: var(--color-light-50);
   background-color: var(--color-dark-100);
   animation: light-to-dark-background 0.3s ease-in-out;
 }
 
-.dark#login_form .input-field input,
-.dark#login_form .input-field i {
+.dark-mode#login_form .input-field input,
+.dark-mode#login_form .input-field i {
   color: var(--color-light-50);
 }
 
