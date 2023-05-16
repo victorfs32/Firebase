@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-import firebase from "firebase/app"; // Importe o objeto firebase aqui
-import "firebase/auth";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/js/dist/dropdown";
@@ -8,14 +6,6 @@ import "bootstrap/js/dist/collapse";
 import "./navbar.css";
 
 function SidebarMenu() {
-  const [userDisplayName, setUserDisplayName] = useState(null);
-
-  useEffect(() => {
-    const currentUser = firebase.auth().currentUser;
-    if (currentUser) {
-      setUserDisplayName(currentUser.displayName);
-    }
-  }, []);
   return (
     <div className="container-fluid">
       <div className="row">
@@ -95,14 +85,14 @@ function SidebarMenu() {
               aria-expanded="false"
             >
               <i className="bi bi-person f5-4"></i>
-              <span className="fs-6 ms-1 d-none d-sm-inline">{userDisplayName}</span>
+              <span className="fs-5 ms-3 d-none d-sm-inline">Yousaf</span>
             </a>
             <div className="dropdown-menu" aria-labelledby="triggerId">
               <a className="dropdown-item" href="#">
                 Perfil
               </a>
               <a className="dropdown-item" href="#">
-                Configurações
+                Configuraçoes
               </a>
             </div>
           </div>
