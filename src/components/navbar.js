@@ -1,16 +1,48 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BsHouseFill } from "react-icons/bs";
 import { FaUser } from "react-icons/fa";
 import { IoMenu } from "react-icons/io";
 import { BiMenu } from "react-icons/bi";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import firebase from "firebase/app";
+import "firebase/auth";
 import "./navbar.css";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [displayName, setDisplayName] = useState(null);
 
   const handleMenuClick = () => {
     setIsOpen(!isOpen);
+  };
+
+  useEffect(() => {
+    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        // O usuário está autenticado
+        setDisplayName(user.displayName);
+      } else {
+        // O usuário não está autenticado
+        setDisplayName(null);
+      }
+    });
+
+    // Limpa o listener ao desmontar o componente
+    return () => unsubscribe();
+  }, []);
+
+  const truncatedDisplayName = displayName ? displayName.substring(0, 11) : "";
+
+  const handleLogout = () => {
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        console.log("Usuário deslogado");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
@@ -22,29 +54,30 @@ const Navbar = () => {
         </a>
         <ul className={`navbar ${isOpen ? "open" : ""}`}>
           <li>
-            <a href="#" className="active">
+            <Link to="/Home" className="active">
               Home
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#">Painel</a>
+            <Link to="/Admin">Painel</Link>
           </li>
           <li>
-            <a href="#">Usuarios</a>
+            <Link to="/Usuarios">Usuarios</Link>
           </li>
           <li>
-            <a href="#">Settings</a>
+            <Link to="#">Settings</Link>
           </li>
           <li>
-            <a href="#">Contact</a>
+            <Link to="#">Contact</Link>
           </li>
         </ul>
         <div className="main">
-          <Link to="/" className="user">
-            <FaUser />
-            Sign In
-          </Link>
-          <a href="#">Log out</a>
+          <a className="user" href="#">
+            {truncatedDisplayName ? truncatedDisplayName : ""}
+          </a>
+          <a href="#" onClick={handleLogout}>
+            Log out
+          </a>
           <div id="menu-icon" onClick={handleMenuClick}>
             <BiMenu />
           </div>

@@ -1,13 +1,18 @@
-import React from "react";
-import SidebarMenu from "../components/navbar";
+import React, { useState, useEffect } from "react";
+import { firebase } from "../services/firebase";
+import Navbar from "../components/navbar";
+import './index.css';
+import "firebase/auth";
 
-function Admin() {
+function Home() {
   return (
     <>
-    <SidebarMenu/>
-      <h1>pagina Admin</h1>
+      <Navbar />
+      <div className="h1">
+        <h1>Seja Bem-vindo Admin</h1>
+      </div>
     </>
   );
 }
 
-export default Admin;
+export default Home;

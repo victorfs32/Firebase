@@ -61,6 +61,13 @@
 .dark-mode #forgot_password a {
   color: var(--color-purple-50);
 }
+.dark-mode #form_header h1 {
+  color: white;
+}
+
+.dark-mode #mode_icon {
+  color: white;
+}
 
 #container {
   height: 100vh;
@@ -93,6 +100,7 @@
 #form_header h1 {
   font-size: 40px;
   position: relative;
+  color: black;
 }
 
 #form_header h1::before {
@@ -108,6 +116,7 @@
 #mode_icon {
   cursor: pointer;
   font-size: 20px;
+  color: black;
 }
 
 #mode_icon:hover {
@@ -122,6 +131,7 @@
 
 #social_media #img {
   font-size: 30px;
+  box-shadow: #fff;
 }
 
 #social_media #img:hover {
@@ -183,7 +193,7 @@
   font-size: 12px;
 }
 
-#Register{
+#Register {
   cursor: pointer;
 }
 

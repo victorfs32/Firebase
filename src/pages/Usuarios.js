@@ -1,13 +1,18 @@
-import React from "react";
-import SidebarMenu from "../components/navbar";
+import React, { useState, useEffect } from "react";
+import { firebase } from "../services/firebase";
+import Navbar from "../components/navbar";
+import './index.css';
+import "firebase/auth";
 
-function Usuarios() {
+function Home() {
   return (
     <>
-    <SidebarMenu/>
-      <h1>Pagina de Usuarios</h1>
+      <Navbar />
+      <div className="h1">
+        <h1>Seja Bem-vindo Usuarios</h1>
+      </div>
     </>
   );
 }
 
-export default Usuarios;
+export default Home;
