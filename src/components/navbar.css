@@ -18,7 +18,7 @@ body{
   color: var(--text-color);
 }
 
-header{
+.custom-header{
   position: fixed;
   width: 100%;
   top: 0;
@@ -38,7 +38,7 @@ header{
 }
 
 .logo svg{
-  color: var(--main-color);
+  color: #7c3aed;
   font-size: 28px;
   margin-right: 3px;
 }
@@ -63,11 +63,11 @@ header{
 }
 
 .navbar a:hover{
-  color: var(--main-color);
+  color: #7c3aed;
 }
 
 .navbar a.active{
-  color: var(--main-color);
+  color: #7c3aed;
 }
 
 .main{
@@ -89,13 +89,13 @@ header{
   align-items: center;
 }
 .user svg{
-  color: var(--main-color);
+  color: #7c3aed;
   font-size: 28px;
   margin-right: 7px;
 }
 
 .main a:hover{
-  color: var(--main-color);
+  color: #7c3aed;
 }
 
 #menu-icon{
