@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Login from "./components/Login";
 import Usuarios from "./pages/Usuarios";
 import Navbar from "./components/navbar";
+import Admin from "./pages/Admin";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -13,6 +14,7 @@ ReactDOM.render(
       <Route path="/home" element={<Home />} />
       <Route path="/usuarios" element={<Usuarios />} />
       <Route path="/navbar" element={<Navbar />} />
+      <Route path="/admin" element={<Admin />} />
     </Routes>
   </BrowserRouter>,
   document.getElementById("root")
