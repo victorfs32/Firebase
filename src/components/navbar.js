@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { BsHouseFill } from "react-icons/bs";
 import { FaUser } from "react-icons/fa";
 import { IoMenu } from "react-icons/io";
@@ -10,9 +11,10 @@ import "./navbar.css";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
   const [displayName, setDisplayName] = useState(null);
 
-  const handleMenuClick = () => {
+  const MenuClick = () => {
     setIsOpen(!isOpen);
   };
 
@@ -33,16 +35,15 @@ const Navbar = () => {
 
   const truncatedDisplayName = displayName ? displayName.substring(0, 11) : "";
 
-  const handleLogout = () => {
+  const Logout = () => {
     firebase
       .auth()
       .signOut()
       .then(() => {
-        console.log("Usuário deslogado");
+        setTimeout(() => {
+          navigate("/");
+        }); // Redirecionamento após 4 segundos
       })
-      .catch((error) => {
-        console.error(error);
-      });
   };
 
   return (
@@ -75,10 +76,10 @@ const Navbar = () => {
           <a className="user" href="#">
             {truncatedDisplayName ? truncatedDisplayName : ""}
           </a>
-          <a href="#" onClick={handleLogout}>
+          <a href="#" onClick={Logout}>
             Log out
           </a>
-          <div id="menu-icon" onClick={handleMenuClick}>
+          <div id="menu-icon" onClick={MenuClick}>
             <BiMenu />
           </div>
         </div>

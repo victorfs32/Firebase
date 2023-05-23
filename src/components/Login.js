@@ -25,7 +25,7 @@ function Login() {
     setIsRegisterMode(!isRegisterMode);
   };
 
-  const handleGitHubSignIn = () => {
+  const GitHubSignIn = () => {
     const provider = new firebase.auth.GithubAuthProvider();
     firebase
       .auth()
@@ -34,18 +34,13 @@ function Login() {
         // Usuário autenticado com sucesso
         const user = result.user;
         console.log(user);
-        alert("Você está conectado!");
         setTimeout(() => {
           navigate("/home"); // Redirecionamento após 4 segundos
-        }, 4000);
+        });
       })
-      .catch((error) => {
-        // Trate os erros caso ocorra algum problema
-        console.error(error);
-      });
   };
 
-  const handleGoogleSignIn = () => {
+  const GoogleSignIn = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     firebase
       .auth()
@@ -54,18 +49,13 @@ function Login() {
         // Usuário autenticado com sucesso
         const user = result.user;
         console.log(user);
-        alert("Você está conectado!");
         setTimeout(() => {
           navigate("/home"); // Redirecionamento após 4 segundos
-        }, 4000);
+        });
       })
-      .catch((error) => {
-        // Trate os erros caso ocorra algum problema
-        console.error(error);
-      });
   };
 
-  const handleEmailSignIn = (event) => {
+  const EmailSignIn = (event) => {
     event.preventDefault();
     const email = event.target.elements.email.value;
     const password = event.target.elements.password.value;
@@ -81,15 +71,10 @@ function Login() {
           // Usuário registrado com sucesso
           const user = result.user;
           console.log(user);
-          alert("Registro concluído! Você está conectado!");
           setTimeout(() => {
             navigate("/home"); // Redirecionamento após 4 segundos
-          }, 4000);
+          });
         })
-        .catch((error) => {
-          // Trate os erros caso ocorra algum problema
-          console.error(error);
-        });
     } else {
       // Faça o login com e-mail e senha
       firebase
@@ -99,47 +84,47 @@ function Login() {
           // Usuário autenticado com sucesso
           const user = result.user;
           console.log(user);
-          alert("Você está conectado!");
           setTimeout(() => {
             navigate("/home"); // Redirecionamento após 4 segundos
-          }, 4000);
+          });
+        })
+    }
+  };
+
+  const PasswordReset = (event) => {
+    if (event) {
+      event.preventDefault();
+      const email = event.target.elements.email.value;
+      // Envia um e-mail para redefinir a senha
+      firebase
+        .auth()
+        .sendPasswordResetEmail(email)
+        .then(() => {
+          alert("E-mail de redefinição de senha enviado!");
         })
         .catch((error) => {
-          // Trate os erros caso ocorra algum problema
           console.error(error);
         });
     }
   };
-
-  const handlePasswordReset = (event) => {
-    event.preventDefault();
-    const email = event.target.elements.email.value;
-    firebase
-      .auth()
-      .sendPasswordResetEmail(email)
-      .then(() => {
-        alert("E-mail de redefinição de senha enviado!");
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+  
+  
 
   return (
     <main id="container" className={darkMode ? "dark-mode" : ""}>
-      <form id="login_form" onSubmit={handleEmailSignIn}>
+      <form id="login_form" onSubmit={EmailSignIn}>
         <div id="form_header">
           <h1>{isRegisterMode ? "Register" : "Login"}</h1>
           <BsFillMoonFill id="mode_icon" onClick={toggleDarkMode} />
-        </div>
+        </div> 
         <div id="social_media">
           <a href="#">
             <FaFacebook id="img" />
           </a>
-          <a href="#" onClick={handleGitHubSignIn}>
+          <a href="#" onClick={GitHubSignIn}>
             <GoMarkGithub id="img" />
           </a>
-          <a href="#" onClick={handleGoogleSignIn}>
+          <a href="#" onClick={GoogleSignIn}>
             <FcGoogle id="img" />
           </a>
         </div>
@@ -182,7 +167,7 @@ function Login() {
             </label>
 
             <div id="forgot_password">
-              <a href="#" onClick={handlePasswordReset}>
+              <a href="#" onClick={PasswordReset}>
                 Redefinir minha senha?
               </a>
               <a id="Register" onClick={toggleRegisterMode}>
